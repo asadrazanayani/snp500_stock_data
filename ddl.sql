@@ -45,3 +45,5 @@ CREATE TABLE cash_flow (
     cashflow_from_cont_operation DECIMAL(15, 2),
     PRIMARY key (period, stock_symbol)
 );
+
+commit;
