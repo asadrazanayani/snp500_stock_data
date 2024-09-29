@@ -5,5 +5,9 @@
         "host": "",
         "port": ,
         "db_name" : ""
-    }
+    },
+    "ingestion" : {
+        "run_ddl" : "Y"
+    },
+    "timeperiod" : "1yr"
 }

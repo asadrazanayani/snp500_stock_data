@@ -6,14 +6,32 @@ from postgres_client import PostgresSingleton
 
 with open('config.json', 'r') as file:
     config = json.load(file)
+    
+ddl_flag = config['ingestion']['run_ddl']
 db_user = config['database']['user']
 db_password = config['database']['password']
 db_host = config['database']['host']
 db_port = config['database']['port']
 db_name = config['database']['db_name']
+period = config['timeperiod']
 db = PostgresSingleton(dbname=db_name, user=db_user, password=db_password, host=db_host, port=db_port)
 connection = db.get_connection()
 connection.autocommit = True
+
+if ddl_flag == 'Y':
+    try:
+        ddl_file = open('ddl.sql', 'r')
+        ddl_script = ddl_file.read()
+        for script in ddl_script.split(';'):
+            print(f'ingesting ddl {script}')
+            try:
+                connection.cursor().execute(script)
+            except Exception as e:
+                print(e)    
+        print('ddl ingested')
+    except Exception as e:
+        print(e)
+        
 
 df_snp500 = pd.read_csv('snp_500.csv')
 all_tickers = df_snp500['Symbol'].unique()
@@ -23,7 +41,7 @@ for ele in all_tickers:
     print(f'ingesting ele {ticker}')
     try:
         msft = yf.Ticker(ticker)
-        hist = msft.history(period="1y")
+        hist = msft.history(period=period)
         financials = msft.financials.T.reset_index()
         balance_sheet = msft.balance_sheet.T.reset_index()
         cash_flow = msft.cashflow.T.reset_index()
