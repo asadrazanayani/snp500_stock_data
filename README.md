@@ -19,6 +19,11 @@ stock closing and financial information
             source venv/bin/activate
             <!-- activates the virtual env -->
             ```
+            OR
+            ```bash
+            source venv/bin/activate
+            <!-- activates the virtual env -->
+            ```
         - ii. Install the `requirements.txt`
             ```bash
             pip install -r requirements.txt
