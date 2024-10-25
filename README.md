@@ -19,9 +19,9 @@ stock closing and financial information
             source venv/bin/activate
             <!-- activates the virtual env -->
             ```
-            OR
+            OR if using windows
             ```bash
-            source venv/bin/activate
+            source venv/Script/activate
             <!-- activates the virtual env -->
             ```
         - ii. Install the `requirements.txt`
