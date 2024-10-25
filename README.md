@@ -12,7 +12,7 @@ stock closing and financial information
     - 3a. Install python on your local computer.
         - i. create a virual env and activate  
             ```bash
-            python3 -m venv venv
+            python -m venv venv
             <!-- create virtual env -->
             ```
             ```bash
@@ -25,5 +25,5 @@ stock closing and financial information
             ```
         - iii. Run the main.py script
             ```bash
-            python3 main.py
+            python main.py
             ```
